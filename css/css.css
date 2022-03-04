@@ -402,6 +402,36 @@
     font-size: 15px;
 }
 
+.banner .circles {
+    width: 160px;
+    height: 20px;
+    position: absolute;
+    bottom: 10px;
+    left: 50%;
+    margin-left: -75px;
+    z-index: 9999;
+}
+
+.banner .circles li{
+    float: left;
+    width: 20px;
+    height: 20px;
+    background-color: #20BD9A;
+    margin-right: 10px;
+    border-radius: 10px;
+    transition: all .5s ease 0s;
+    cursor: pointer;
+}
+
+.banner .circles li:last-child{
+    margin-right: 0;
+}
+
+.banner .circles li.current{
+    width: 40px;
+    background-color: #15AF7A;
+}
+
 .hot-ads{
     margin: 32px 0;
 }
