@@ -79,8 +79,15 @@
             }
         },20)
 
+        var lastX = 0;
+        var lastY = 0;
         document.onmousemove = function(e){
-            new Ball(e.clientX, e.clientY);
+            if(Math.abs(e.clientX-lastX)>8 || Math.abs(e.clientY-lastY)>8){
+                new Ball(e.clientX, e.clientY);
+                lastX = e.clientX;
+                lastY = e.clientY;
+            }
+            
         }
     </script>
 </body>
