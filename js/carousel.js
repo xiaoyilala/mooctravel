@@ -1,4 +1,8 @@
-/**轮播图*/
+/**
+ * 轮播图
+ * 通栏轮播图拉动translateX属性
+ * 固定宽度轮播图拉动left属性
+ */
 (function(){
     var carousel_list = document.getElementById('carousel_list');
     var left_btn = document.getElementById('left_btn');
