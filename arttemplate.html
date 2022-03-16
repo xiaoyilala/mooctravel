@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div id="content"></div>
+    <div id="othercontent"></div>
+    <p id="p2">条件</p>
+    <p id="p1">学生</p>
+    <ul id="list"></ul>
+
+    <!-- 第一步 引入 -->
+    <script src="https://unpkg.com/art-template@4.13.2/lib/template-web.js"></script>
+
+    <!-- 第二步 准备模板 -->
+    <!-- 循环 -->
+    <script type="text/html" id="tpl-students">
+        {{each students}}
+            <li>{{$value.name}} {{$value.age}} {{$value.sex}} {{$index}}</li>
+        {{/each}}
+    </script>
+    <script type="text/html" id="tpl-1">
+        {{key}}<br>
+        <!-- $data 就是 template函数提供的数据对象 -->
+        {{$data.obj.key}}
+        {{text}}
+        <!-- @让text中的标签生效 -->
+        {{@ text}}
+    </script>
+
+    <!-- 条件 -->
+    <script type="text/html" id="tpl-2">
+        {{if value === 1}}
+            {{value}}
+        {{else if value === 2}}
+            二
+        {{else}}
+            其他
+        {{/if}}
+    </script>
+
+    <!-- 子模板 -->
+    <script type="text/html" id="tpl-3">
+        {{include 'tpl-header'}}
+        <p>页面</p>
+        {{include 'tpl-footer'}}
+    </script>
+    <script type="text/html" id="tpl-header">
+        <header>公共头部</header>
+    </script>
+    <script type="text/html" id="tpl-footer">
+        <footer>公共尾部</footer>
+    </script>
+
+    <!-- 子模板传参 -->
+    <script type="text/html" id="tpl-4">
+        {{include 'tpl-header-4'}}
+        <% include('tpl-header-4', {
+            page:'首页'
+        }) %>
+        <p>页面</p>
+        {{include 'tpl-footer-4'}}
+        <% include('tpl-footer-4', {
+            page:'首页'
+        }) %>
+    </script>
+    <script type="text/html" id="tpl-header-4">
+        <header>公共头部{{page}}</header>
+    </script>
+    <script type="text/html" id="tpl-footer-4">
+        <footer>公共尾部{{page}}</footer>
+    </script>
+
+    <script>
+        const students = [
+            {
+                name:"ice",
+                age:18,
+                sex:'male'
+            },
+            {
+                name:"ice2",
+                age:18,
+                sex:'male'
+            },
+            {
+                name:"ice3",
+                age:18,
+                sex:'male'
+            },
+            {
+                name:"ice4",
+                age:18,
+                sex:'male'
+            },
+        ]
+        
+        const p1 = document.getElementById('p1');
+        const list = document.getElementById("list");
+        // 第三步 template函数调用
+        list.innerHTML = template('tpl-students',{
+            // 一样可以省略key 'students':students
+            students
+        });
+        p1.innerHTML += template('tpl-1', {
+            key:4,
+            obj:{
+                key:5
+            },
+            text:'<strong>加粗</strong>'
+        });
+
+        const p2 = document.getElementById('p2');
+        p2.innerHTML += template('tpl-2', {
+            value:3
+        });
+
+        const content = document.getElementById('content');
+        content.innerHTML = template('tpl-3',{})
+
+        const othercontent = document.getElementById('othercontent');
+        othercontent.innerHTML = template('tpl-4',{})
+    </script>
+</body>
+</html>
