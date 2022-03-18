@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .box{
+            width: 200px;
+            height: 200px;
+            margin: 20px auto;
+            background-color: red;
+        }
+        .backtop{
+            position: fixed;
+            right: 20px;
+            bottom: 20px;
+            width: 45px;
+            height: 45px;
+            line-height: 45px;
+            text-align: center;
+            background-color: rgba(0,0,0,0.6);
+            border-radius: 50%;
+            color: #fff;
+            font-size: 26px;
+            -webkit-tap-highlight-color: transparent;
+            /* 移动端性能考虑 这个能使用GPU加速 */
+            /* transform: translate3d(x,y,0); 移动参考的坐标是元素初始时候的位置，如果传0不会移动，传两次相同的值第一次会移动第二次不会*/
+        }
+    </style>
+</head>
+<body>
+    <div class="box" id="box"></div>
+
+    <a href="###" class="backtop" id="backtop">&uarr;</a>
+
+    <script>
+
+        const box = document.getElementById('box');
+
+        box.addEventListener('touchstart', touchStart, false);
+        box.addEventListener('touchmove', touchMove, false);
+        box.addEventListener('touchend', touchEnd, false);
+        box.addEventListener('touchcacel', touchCancel, false);
+
+        function touchStart(){
+            console.log("touchStart");
+        }
+        function touchMove(){
+            console.log("touchMove");
+        }
+        function touchEnd(){
+            console.log("touchEnd");
+        }
+        function touchCancel(){
+            console.log("touchCancel");
+        }
+
+    </script>
+</body>
+</html>

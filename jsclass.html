@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+
+    <script>
+        class Person{
+            //静态属性 提案 有兼容性问题，推荐写成方法
+            // static version = '1.0';
+
+            //实例属性
+            age = 0;
+            sex = 'male';
+            constructor(name,age){
+                //实例属性
+                this.name = name;
+                //修改属性值
+                this.age = age;
+            }
+
+            //实例方法
+            speak(){
+                console.log('speak');
+            }
+
+            //静态方法
+            static speak(){
+                console.log('class speak');
+            }
+            //静态属性变通写法
+            static getVersion(){
+                return '1.0';
+            }
+        }
+        //静态属性
+        Person.version = '1.0';
+
+        const p = new Person("ice","20");
+        p.speak();
+        Person.speak();
+        console.log(p);
+        
+        new (class {
+            constructor(){
+                console.log("constructor");
+            }
+        })()
+
+    </script>
+</body>
+
+</html>

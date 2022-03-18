@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="./css/base.css">
+    <link rel="stylesheet" href="./css/slider.css">
+</head>
+<body>
+    <div class="slider" id="slider">
+        <div class="slider-item-container">
+            <div class="slider-item">
+                <a href="###" class="slider-link">
+                    <img src="./img/banner1.jpg" alt="slider" class="slider-img">
+                </a>
+            </div>
+            <div class="slider-item">
+                <a href="###" class="slider-link">
+                    <img src="./img/banner2.jpg" alt="slider" class="slider-img">
+                </a>
+            </div>
+            <div class="slider-item">
+                <a href="###" class="slider-link">
+                    <img src="./img/banner3.jpg" alt="slider" class="slider-img">
+                </a>
+            </div>
+            <div class="slider-item">
+                <a href="###" class="slider-link">
+                    <img src="./img/banner4.jpg" alt="slider" class="slider-img">
+                </a>
+            </div>
+            <div class="slider-item">
+                <a href="###" class="slider-link">
+                    <img src="./img/banner5.jpg" alt="slider" class="slider-img">
+                </a>
+            </div>
+        </div>
+        <div class="slider-indicator-container">
+            <!-- <span class="slider-indicator"></span>
+            <span class="slider-indicator"></span>
+            <span class="slider-indicator"></span>
+            <span class="slider-indicator"></span>
+            <span class="slider-indicator"></span> -->
+        </div>
+    </div>
+
+    <script src="./js/hammer.min.js"></script>
+    <script src="./js/slider.js"></script>
+
+    <script>
+        const slider = new Slider(document.getElementById('slider'), {
+            initIndex : 0,
+            speed:200,
+            hasIndicator:true
+        });
+        const hammer = new Hammer(slider.getItemContainer());
+        //为了防止panend和swipe同时执行导致切换多张图片，引入该变量，在swipe执行时不执行panend事件
+        var isSwipe = false;
+        hammer.on('panmove', function(ev){
+            var distance= 0;
+            distance = ev.deltaX+slider.getDistanceByIndex(slider.getIndex());
+
+            slider.move(distance);
+        });
+        hammer.on('panend', function(ev){
+            if(isSwipe){
+                return;
+            }
+            var index= 0;
+            var distance = ev.deltaX+slider.getDistanceByIndex(slider.index);
+            if(distance>0){
+                index = 0;
+            }else{
+                index = Math.round(-distance/slider.getDistancePerSlider());
+                if(index>slider.getMaxIndex()){
+                    index = slider.getMaxIndex();
+                }
+            }
+            slider.to(index);
+        });
+        hammer.on('swipeleft', function(ev){
+            isSwipe = true;
+            slider.next(function(){
+                isSwipe = false;
+            });
+        });
+        hammer.on('swiperight', function(ev){
+            isSwipe = true;
+            slider.prev(function(){
+                isSwipe = false;
+            });
+        });
+    </script>
+
+</body>
+</html>

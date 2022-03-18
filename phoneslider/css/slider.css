@@ -1,0 +1,46 @@
+.slider{
+    overflow: hidden;
+    position: relative;
+    width: 100%;
+    height: 183px;
+}
+.slider-item-container,
+.slider-item,
+.slider-link,
+.slider-img{
+    width: 100%;
+    height: 100%;
+}
+
+.slider-item-container{
+    display: flex;
+    transition: transform 0;
+}
+.slider-item{
+    /* 收缩因子 默认1 5张图片宽度大于盒子宽度，会被收缩，设置为0，图片不收缩 */
+    flex-shrink: 0;
+}
+.slider-link{
+    /* a标签这样设置宽高才有用 */
+    display: block;
+}
+
+.slider-indicator-container{
+    position: absolute;
+    bottom: 10px;
+    width: 100%;
+    text-align: center;
+}
+.slider-indicator{
+    display: inline-block;
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    opacity: 0.5;
+    background-color: #000;
+    margin-right: 8px;
+}
+.slider-indicator-active{
+    background-color: #007aff;
+    opacity: 1;
+}
